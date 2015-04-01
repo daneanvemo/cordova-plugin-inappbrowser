@@ -221,7 +221,13 @@
     // Run later to avoid the "took a long time" log message.
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.inAppBrowserViewController != nil) {
-            [self.viewController presentViewController:nav animated:YES completion:nil];
+
+            // Due to the fix in CB-4930 page content could be seen behind status bar while scrolling. The fix did it 
+            // impossible to reach the area behind the status bar to cover the page content. By reverting this
+            // fix, it is now possible to do a workaround and add a white div below the status bar.
+            
+            // [self.viewController presentViewController:nav animated:YES completion:nil];
+            [self.viewController presentModalViewController:self.inAppBrowserViewController animated:YES]; 
         }
     });
 }
