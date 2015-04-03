@@ -980,9 +980,10 @@
 @end
 
 @implementation CDVInAppBrowserNavigationController : UINavigationController
+
 - (void) viewDidLoad {
 
-    CGRect frame = [UIApplication sharedApplication].statusBarFrame;+
+    CGRect frame = [UIApplication sharedApplication].statusBarFrame;
     // simplified from: http://stackoverflow.com/a/25669695/219684
 
     UIToolbar* bgToolbar = [[UIToolbar alloc] initWithFrame:frame];
