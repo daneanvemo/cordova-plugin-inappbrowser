@@ -226,8 +226,8 @@
             // impossible to reach the area behind the status bar to cover the page content. By reverting this
             // fix, it is now possible to do a workaround and add a white div below the status bar.
             
-            // [self.viewController presentViewController:nav animated:YES completion:nil];
-            [self.viewController presentModalViewController:self.inAppBrowserViewController animated:YES]; 
+            [self.viewController presentViewController:nav animated:YES completion:nil];
+            //[self.viewController presentModalViewController:self.inAppBrowserViewController animated:YES]; 
         }
     });
 }
@@ -980,6 +980,17 @@
 @end
 
 @implementation CDVInAppBrowserNavigationController : UINavigationController
+- (void) viewDidLoad {
+
+    CGRect frame = [UIApplication sharedApplication].statusBarFrame;+
+    // simplified from: http://stackoverflow.com/a/25669695/219684
+
+    UIToolbar* bgToolbar = [[UIToolbar alloc] initWithFrame:frame];
+    bgToolbar.barStyle = UIBarStyleDefault;
+    [self.view addSubview:bgToolbar];
+
+    [super viewDidLoad];
+}
 
 #pragma mark CDVScreenOrientationDelegate
 
